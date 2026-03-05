@@ -1,0 +1,28 @@
+:root {
+  --primary-black: #000;
+  --secondary-gray: #535353;
+  --secondary-light-gray: #9D9D9D;
+  --secondary-white: #fff;
+  --secondary-red: #E41616;
+  --border-light-gray: #DCDCDC;
+  --border-hover: #292929;
+}
+
+body {
+  font-family: Inter, sans-serif;
+}
+
+.best-sellers {
+  padding: 64px;
+}
+
+.best-sellers__container {
+  padding: 32px 16px;
+}
+
+@media screen and (min-width: 420px) {
+  .best-sellers__container {
+    display: flex;
+    gap: 16px;
+  }
+}
