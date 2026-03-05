@@ -20,6 +20,34 @@ body {
   padding: 32px 16px;
 }
 
+.card {
+  position: relative;
+  max-width: 816px;
+  max-height: 816px;
+  width: 100%;
+}
+
+.card__image {
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
+
+.card__content {
+  position: relative;
+  z-index: 1;
+}
+
+.category__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.card__icon {
+  width: 24px;
+  height: 24px;
+}
+
 @media screen and (min-width: 420px) {
   .best-sellers__container {
     display: flex;
