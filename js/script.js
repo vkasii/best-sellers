@@ -4,8 +4,8 @@ const cards = [
     categoryName: 'Mantra Rings',
     cardData: {
       name: 'VIP Ring',
-      oldPrice: '1,998.00',
-      newPrice: '999.00',
+      oldPrice: '₴1,998.00',
+      newPrice: '₴999.00',
       tags: ['New', 'Sale', 'Ring'],
       mobileImage: '../assets/images/mantra-rings-mobile.webp',
       mobileImage2x: '../assets/images/mantra-rings-mobile@2x.webp',
@@ -22,8 +22,8 @@ const cards = [
     categoryName: 'CharityBands®',
     cardData: {
       name: 'Butterfly - Hope And Rebirth',
-      oldPrice: '1,424.00',
-      newPrice: '1,424.00',
+      oldPrice: '₴1,424.00',
+      newPrice: '₴1,424.00',
       tags: ['New', 'Sale'],
       mobileImage: '../assets/images/charity-bands-mobile.webp',
       mobileImage2x: '../assets/images/charity-bands-mobile@2x.webp',
@@ -40,8 +40,8 @@ const cards = [
     categoryName: 'Statement Collection',
     cardData: {
       name: 'Best Statement Ever',
-      oldPrice: '2,424.00',
-      newPrice: '1,600.00',
+      oldPrice: '₴2,424.00',
+      newPrice: '₴1,600.00',
       tags: ['New', 'Sale', 'Top'],
       mobileImage: '../assets/images/statement-collection-mobile.webp',
       mobileImage2x: '../assets/images/statement-collection-mobile@2x.webp',
@@ -55,16 +55,23 @@ const cards = [
   }
 ]
 
+const html = document.querySelector('html')
+
 const bestSellersCategories = document.querySelector('.best-sellers__categories')
 const bestSellersCard = document.querySelector('.best-sellers__card')
+
+const bestSellersModalContainer = document.querySelector('.best-sellers__modal-container')
+const backdrop = document.querySelector('.backdrop')
+
+const modalContent = document.querySelector('.modal__content')
 
 const PRODUCT_ICONS = '../assets/icons/product-icons.svg'
 
 function renderCategories() {
-  bestSellersCategories.innerHTML = cards.map(category => `
-    <li class="best-seller__category category">
-      <button class="category__button">
-        <h3 class="category__title">${category.categoryName}</h3>
+  bestSellersCategories.innerHTML = cards.map(item => `
+    <li class="best-sellers__category category">
+      <button class="category__button" data-id="${item.id}" onclick="displayCard(event)">
+        <h3 class="category__title">${item.categoryName}</h3>
         <svg class="category__icon">
           <use href="${PRODUCT_ICONS}#arrow"></use>
         </svg>
@@ -78,7 +85,7 @@ function renderCard(cardData) {
   <a href="#">
     <picture>
       <source 
-        media="(max-width: 420px)"
+        media="(max-width: 352px)"
         srcset="
           ${cardData.mobileImage} 1x,
           ${cardData.mobileImage2x} 2x"
@@ -111,12 +118,12 @@ function renderCard(cardData) {
         ${renderTags(cardData.tags)}
       </ul>
       <div class="card__actions">
-        <button type="button">
+        <button type="button" class="card__button">
           <svg class="card__icon">
             <use href="${PRODUCT_ICONS}#heart"></use>
           </svg>
         </button>
-        <button type="button">
+        <button type="button" class="card__button" onclick="openBestSellersModal('${cardData.name}')">
           <svg class="card__icon">
             <use href="${PRODUCT_ICONS}#eye"></use>
           </svg>
@@ -124,10 +131,10 @@ function renderCard(cardData) {
       </div>
     </header>
     <footer class="card__footer">
-      <a href="#">${cardData.name}</a>
-      <div class="card__price">
-        <p>${cardData.newPrice}</p>
-        <del>${cardData.oldPrice}</del>
+      <a href="#" class="card__name">${cardData.name}</a>
+      <div class="card__prices">
+        <p class="card__price">${cardData.newPrice}</p>
+        <del class="card__price card__price--old">${cardData.oldPrice}</del>
       </div>
     </footer>
   </div>
@@ -140,5 +147,51 @@ function renderTags(tags) {
     `).join('')
 }
 
+function displayCard(event) {
+  const button = event.target.closest('.category__button')
+
+  const categoryButtons = document.querySelectorAll('.category__button')
+  categoryButtons.forEach(btn => {
+    btn.classList.remove('category__button--active')
+  })
+
+  button.classList.add('category__button--active')
+  const cardId = button.dataset.id
+
+  const cardData = cards.find(card => card.id === Number(cardId))
+  renderCard(cardData.cardData)
+}
+
+
+function openBestSellersModal(productName) {
+  renderModalContent(productName)
+  bestSellersModalContainer.classList.add('open-modal')
+  backdrop.classList.add('open-backdrop')
+  html.classList.add('scroll-lock')
+
+}
+
+function closeBestSellersModal() {
+  bestSellersModalContainer.classList.remove('open-modal')
+  backdrop.classList.remove('open-backdrop')
+  html.classList.remove('scroll-lock')
+}
+
+function renderModalContent(name) {
+  modalContent.innerHTML = `
+    <p class="modal__info"><strong>${name}</strong> has been added to the your cart.</p>
+  `
+}
+
+function activateFirstCategory() {
+  const firstButton = document.querySelector('.category__button')
+  if (!firstButton) return
+
+  firstButton.classList.add('category__button--active')
+}
+
 renderCategories()
+activateFirstCategory()
 renderCard(cards[0].cardData)
+
+

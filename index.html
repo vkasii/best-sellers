@@ -26,11 +26,24 @@
         <h2 class="best-sellers__title">Trending Products</h2>
         <ul class="best-sellers__categories">
         </ul>
-
       </div>
       <article class="best-sellers__card card">
       </article>
     </section>
+    <div class="best-sellers__modal-container">
+      <div class="best-sellers__modal">
+        <header class="modal__header">
+          <button type="button" class="modal__close-btn" onclick=closeBestSellersModal()>
+            <svg class="modal__icon">
+              <use href="/assets/icons/product-icons.svg#close"></use>
+            </svg>
+          </button>
+        </header>
+        <div class="modal__content">
+        </div>
+      </div>
+      <div class="backdrop" onclick=closeBestSellersModal()></div>
+    </div>
   </main>
 </body>
 
