@@ -47,7 +47,7 @@ closeModalBtn.addEventListener('click', closeBestSellersModal)
 
 document.addEventListener('click', closeModalOnBackdropClick)
 
-// Для перегляду другого варіанту потрібно закоментувати код нижче і розкоментувати 
+// Для перегляду другого варіанту потрібно розкоментувати закоментований код нижче і закоментувати весь розкоментований нижче
 // function prohibitActiveTabClosure(e) {
 //   const bestSellerTabContainer = e.target.closest('.best-sellers__tab-container')
 //   if (bestSellerTabContainer.hasAttribute('open')) {
