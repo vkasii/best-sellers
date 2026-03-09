@@ -1,197 +1,97 @@
-const cards = [
-  {
-    id: 1,
-    categoryName: 'Mantra Rings',
-    cardData: {
-      name: 'VIP Ring',
-      oldPrice: '₴1,998.00',
-      newPrice: '₴999.00',
-      tags: ['New', 'Sale', 'Ring'],
-      mobileImage: '../assets/images/mantra-rings-mobile.webp',
-      mobileImage2x: '../assets/images/mantra-rings-mobile@2x.webp',
-      tabletImage: '../assets/images/mantra-rings-tablet.webp',
-      tabletImage2x: '../assets/images/mantra-rings-tablet@2x.webp',
-      desktopImage: '../assets/images/mantra-rings.webp',
-      desktopImage2x: '../assets/images/mantra-rings@2x.webp',
-      fallbackImage: '../assets/images/mantra-rings.jpg',
-      fallbackImage2x: '../assets/images/mantra-rings@2x.jpg',
-    }
-  },
-  {
-    id: 2,
-    categoryName: 'CharityBands®',
-    cardData: {
-      name: 'Butterfly - Hope And Rebirth',
-      oldPrice: '₴1,424.00',
-      newPrice: '₴1,424.00',
-      tags: ['New', 'Sale'],
-      mobileImage: '../assets/images/charity-bands-mobile.webp',
-      mobileImage2x: '../assets/images/charity-bands-mobile@2x.webp',
-      tabletImage: '../assets/images/charity-bands-tablet.webp',
-      tabletImage2x: '../assets/images/charity-bands-tablet@2x.webp',
-      desktopImage: '../assets/images/charity-bands.webp',
-      desktopImage2x: '../assets/images/charity-bands@2x.webp',
-      fallbackImage: '../assets/images/charity-bands.jpg',
-      fallbackImage2x: '../assets/images/charity-bands@2x.jpg',
-    }
-  },
-  {
-    id: 3,
-    categoryName: 'Statement Collection',
-    cardData: {
-      name: 'Best Statement Ever',
-      oldPrice: '₴2,424.00',
-      newPrice: '₴1,600.00',
-      tags: ['New', 'Sale', 'Top'],
-      mobileImage: '../assets/images/statement-collection-mobile.webp',
-      mobileImage2x: '../assets/images/statement-collection-mobile@2x.webp',
-      tabletImage: '../assets/images/statement-collection-tablet.webp',
-      tabletImage2x: '../assets/images/statement-collection-tablet@2x.webp',
-      desktopImage: '../assets/images/statement-collection.webp',
-      desktopImage2x: '../assets/images/statement-collection@2x.webp',
-      fallbackImage: '../assets/images/statement-collection.jpg',
-      fallbackImage2x: '../assets/images/statement-collection@2x.jpg',
-    }
-  }
-]
-
 const html = document.querySelector('html')
 
+const bestSellersTabs = document.querySelectorAll('.best-sellers__tab')
+
+const addToCartButtons = document.querySelectorAll('.add-to-cart')
+const bestSellersModal = document.querySelector('.best-sellers__modal')
+const modalCardTitle = document.querySelector('.modal__card-title')
+const closeModalBtn = document.querySelector('.modal__close-btn')
+
+let isModalOpen = false
+
+function renderModalInfo(event) {
+  const button = event.target.closest('.add-to-cart')
+  const name = button.dataset.name;
+
+  modalCardTitle.textContent = `${name}`
+}
+
+function openBestSellersModal(event) {
+  renderModalInfo(event)
+  isModalOpen = true
+  bestSellersModal.showModal()
+  html.classList.add('scroll-lock')
+}
+
+function closeBestSellersModal() {
+  isModalOpen = false
+  bestSellersModal.close()
+  html.classList.remove('scroll-lock')
+}
+
+function closeModalOnBackdropClick(event) {
+  if (!isModalOpen) return
+
+  if (event.target.closest('.best-sellers__modal')) {
+    if (!event.target.closest('.modal__container')) {
+      bestSellersModal.close()
+    }
+  }
+}
+
+addToCartButtons.forEach(btn => {
+  btn.addEventListener('click', openBestSellersModal)
+})
+
+closeModalBtn.addEventListener('click', closeBestSellersModal)
+
+document.addEventListener('click', closeModalOnBackdropClick)
+
+// Для перегляду другого варіанту потрібно закоментувати код нижче і розкоментувати 
+// function prohibitActiveTabClosure(e) {
+//   const bestSellerTabContainer = e.target.closest('.best-sellers__tab-container')
+//   if (bestSellerTabContainer.hasAttribute('open')) {
+//     e.preventDefault();
+//   }
+//   return
+// }
+
+// bestSellersTabs.forEach(tab => {
+//   tab.addEventListener('click', prohibitActiveTabClosure)
+// })
+
 const bestSellersCategories = document.querySelector('.best-sellers__categories')
-const bestSellersCard = document.querySelector('.best-sellers__card')
+const categoryButtons = document.querySelectorAll('.category__button')
 
-const bestSellersModalContainer = document.querySelector('.best-sellers__modal-container')
-const backdrop = document.querySelector('.backdrop')
+const bestSellersCard = document.querySelectorAll('.best-sellers__card')
 
-const modalContent = document.querySelector('.modal__content')
+function activateFirstCategory() {
+  const firstButton = categoryButtons[0]
 
-const PRODUCT_ICONS = '../assets/icons/product-icons.svg'
+  if (!firstButton) return
 
-function renderCategories() {
-  bestSellersCategories.innerHTML = cards.map(item => `
-    <li class="best-sellers__category category">
-      <button class="category__button" data-id="${item.id}" onclick="displayCard(event)">
-        <h3 class="category__title">${item.categoryName}</h3>
-        <svg class="category__icon">
-          <use href="${PRODUCT_ICONS}#arrow"></use>
-        </svg>
-      </button>
-    </li>
-    `).join('')
-}
-
-function renderCard(cardData) {
-  bestSellersCard.innerHTML = `
-  <a href="#">
-    <picture>
-      <source 
-        media="(max-width: 352px)"
-        srcset="
-          ${cardData.mobileImage} 1x,
-          ${cardData.mobileImage2x} 2x"
-      />
-      <source 
-        media="(max-width: 991px)"
-        srcset="
-          ${cardData.tabletImage} 1x,
-          ${cardData.tabletImage2x} 2x"
-      />
-
-      <source 
-        media="(min-width: 992px)"
-        srcset="
-          ${cardData.desktopImage} 1x,
-          ${cardData.desktopImage2x} 2x"
-      />
-      <img
-        class="card__image"
-        src="${cardData.fallbackImage}"
-        srcset="${cardData.fallbackImage} 1x,
-          ${cardData.fallbackImage2x} 2x"
-        alt="${cardData.name}"
-      />
-    </picture>
-  </a>
-  <div class="card__content">
-    <header class="card__header">
-      <ul class="card__tags">
-        ${renderTags(cardData.tags)}
-      </ul>
-      <div class="card__actions">
-        <button type="button" class="card__button">
-          <svg class="card__icon">
-            <use href="${PRODUCT_ICONS}#heart"></use>
-          </svg>
-        </button>
-        <button type="button" class="card__button" onclick="openBestSellersModal('${cardData.name}')">
-          <svg class="card__icon">
-            <use href="${PRODUCT_ICONS}#eye"></use>
-          </svg>
-        </button>
-      </div>
-    </header>
-    <footer class="card__footer">
-      <a href="#" class="card__name">${cardData.name}</a>
-      <div class="card__prices">
-        <p class="card__price">${cardData.newPrice}</p>
-        <del class="card__price card__price--old">${cardData.oldPrice}</del>
-      </div>
-    </footer>
-  </div>
-  `
-}
-
-function renderTags(tags) {
-  return tags.map(tag => `
-      <li class="card__tag ${tag.toLowerCase() === 'sale' ? 'card__tag--sale' : ''}">${tag}</li>
-    `).join('')
+  firstButton.classList.add('category__button--active')
+  bestSellersCard[0].classList.add('card-open')
 }
 
 function displayCard(event) {
   const button = event.target.closest('.category__button')
+  const categoryId = button.dataset.id
 
-  const categoryButtons = document.querySelectorAll('.category__button')
-  categoryButtons.forEach(btn => {
+  categoryButtons.forEach((btn, index) => {
+    btn.ariaSelected = false
     btn.classList.remove('category__button--active')
+    bestSellersCard[index].classList.remove('card-open')
   })
 
+  bestSellersCard[categoryId].classList.add('card-open')
   button.classList.add('category__button--active')
-  const cardId = button.dataset.id
-
-  const cardData = cards.find(card => card.id === Number(cardId))
-  renderCard(cardData.cardData)
+  button.ariaSelected = true
 }
 
 
-function openBestSellersModal(productName) {
-  renderModalContent(productName)
-  bestSellersModalContainer.classList.add('open-modal')
-  backdrop.classList.add('open-backdrop')
-  html.classList.add('scroll-lock')
+categoryButtons.forEach(btn => {
+  btn.addEventListener('click', displayCard)
+})
 
-}
-
-function closeBestSellersModal() {
-  bestSellersModalContainer.classList.remove('open-modal')
-  backdrop.classList.remove('open-backdrop')
-  html.classList.remove('scroll-lock')
-}
-
-function renderModalContent(name) {
-  modalContent.innerHTML = `
-    <p class="modal__info"><strong>${name}</strong> has been added to the your cart.</p>
-  `
-}
-
-function activateFirstCategory() {
-  const firstButton = document.querySelector('.category__button')
-  if (!firstButton) return
-
-  firstButton.classList.add('category__button--active')
-}
-
-renderCategories()
 activateFirstCategory()
-renderCard(cards[0].cardData)
-
-

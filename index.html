@@ -22,29 +22,371 @@
   <main class="best-sellers">
     <section class="best-sellers__container">
       <div class="best-sellers__content">
-        <p class="best-sellers__subtitle">Best sellers</p>
-        <h2 class="best-sellers__title">Trending Products</h2>
-        <ul class="best-sellers__categories">
-        </ul>
-      </div>
-      <article class="best-sellers__card card">
-      </article>
-    </section>
-    <div class="best-sellers__modal-container">
-      <div class="best-sellers__modal">
-        <header class="modal__header">
-          <button type="button" class="modal__close-btn" onclick=closeBestSellersModal()>
-            <svg class="modal__icon">
-              <use href="/assets/icons/product-icons.svg#close"></use>
-            </svg>
-          </button>
-        </header>
-        <div class="modal__content">
+        <div class="best-sellers__info">
+          <p class="best-sellers__subtitle">Best sellers</p>
+          <h2 class="best-sellers__title">Trending Products</h2>
         </div>
+        <nav>
+          <ul class="best-sellers__categories" role="tablist">
+            <li class="best-sellers__category category">
+              <button type="button" class="category__button" data-id="0" role="tab" id="tab-rings" aria-selected="true"
+                aria-controls="panel-rings">
+                <span class="category__title">Mantra Rings</span>
+                <svg class="category__icon">
+                  <use href="./assets/icons/product-icons.svg#arrow"></use>
+                </svg>
+              </button>
+            </li>
+
+            <li class="best-sellers__category category">
+              <button type="button" class="category__button" data-id="1" role="tab" id="tab-bands" aria-selected="false"
+                aria-controls="panel-bands">
+                <span class="category__title">CharityBands®</span>
+                <svg class="category__icon">
+                  <use href="./assets/icons/product-icons.svg#arrow"></use>
+                </svg>
+              </button>
+            </li>
+
+            <li class="best-sellers__category category">
+              <button type="button" class="category__button" data-id="2" role="tab" id="tab-statement"
+                aria-selected="false" aria-controls="panel-statement">
+                <span class="category__title">Statement Collection</span>
+                <svg class="category__icon">
+                  <use href="./assets/icons/product-icons.svg#arrow"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <div class="backdrop" onclick=closeBestSellersModal()></div>
-    </div>
+      <ul class="best-sellers__cards">
+        <li id="panel-rings" role="tabpanel" aria-labelledby="tab-rings">
+          <article class="best-sellers__card card">
+            <a href="#">
+              <picture>
+                <source media="(max-width: 352px)" srcset="
+          ./assets/images/mantra-rings-mobile.webp 1x,
+          ./assets/images/mantra-rings-mobile@2x.webp 2x" />
+                <source media="(max-width: 991px)" srcset="
+          ./assets/images/mantra-rings-tablet.webp 1x,
+          ./assets/images/mantra-rings-tablet@2x.webp 2x" />
+                <img class="card__image" src="./assets/images/mantra-rings.jpg" alt="VIP Ring" />
+              </picture>
+            </a>
+            <div class="card__content">
+              <header class="card__header">
+                <ul class="card__tags">
+                  <li class="card__tag">New</li>
+                  <li class="card__tag card__tag--sale">Sale</li>
+                </ul>
+                <ul class="card__actions">
+                  <li>
+                    <button type="button" class="card__button" aria-label="Like button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#heart"></use>
+                      </svg>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="card__button add-to-cart" data-name="VIP Ring"
+                      aria-label="Save to cart button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#eye"></use>
+                      </svg>
+                    </button>
+                  </li>
+                </ul>
+              </header>
+              <footer class="card__footer">
+                <a href="#" class="card__name">VIP Ring</a>
+                <div class="card__prices">
+                  <span class="card__price">₴1,999.00</span>
+                  <del class="card__price card__price--old">₴999.00</del>
+                </div>
+              </footer>
+            </div>
+          </article>
+        </li>
+        <li id="panel-bands" role="tabpanel" aria-labelledby="tab-bands">
+          <article class="best-sellers__card card">
+            <a href="#">
+              <picture>
+                <source media="(max-width: 352px)" srcset="
+          ./assets/images/charity-bands-mobile.webp 1x,
+          ./assets/images/charity-bands-mobile@2x.webp 2x" />
+                <source media="(max-width: 991px)" srcset="
+          ./assets/images/charity-bands-tablet.webp 1x,
+          ./assets/images/charity-bands-tablet@2x.webp 2x" />
+                <img class="card__image" src="./assets/images/charity-bands.jpg" alt="Butterfly - Hope And Rebirth" />
+              </picture>
+            </a>
+            <div class="card__content">
+              <header class="card__header">
+                <ul class="card__tags">
+                  <li class="card__tag">New</li>
+                  <li class="card__tag card__tag--sale">Sale</li>
+                  <li class="card__tag">Top</li>
+                </ul>
+                <ul class="card__actions">
+                  <li>
+                    <button type="button" class="card__button" aria-label="Like button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#heart"></use>
+                      </svg>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="card__button add-to-cart" data-name="Butterfly - Hope And Rebirth"
+                      aria-label="Save to cart button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#eye"></use>
+                      </svg>
+                    </button>
+                  </li>
+                </ul>
+              </header>
+              <footer class="card__footer">
+                <a href="#" class="card__name">Butterfly - Hope And Rebirth</a>
+                <div class="card__prices">
+                  <span class="card__price">₴1,424.00</span>
+                  <del class="card__price card__price--old">₴1,424.00</del>
+                </div>
+              </footer>
+            </div>
+          </article>
+        </li>
+        <li id="panel-statement" role="tabpanel" aria-labelledby="tab-statement">
+          <article class="best-sellers__card card">
+            <a href="#">
+              <picture>
+                <source media="(max-width: 352px)" srcset="
+          ./assets/images/statement-collection-mobile.webp 1x,
+          ./assets/images/statement-collection-mobile@2x.webp 2x" />
+                <source media="(max-width: 991px)" srcset="
+          ./assets/images/statement-collection-tablet.webp 1x,
+          ./assets/images/statement-collection-tablet@2x.webp 2x" />
+                <img class="card__image" src="./assets/images/statement-collection.jpg" alt="Best Statement Ever" />
+              </picture>
+            </a>
+            <div class="card__content">
+              <header class="card__header">
+                <ul class="card__tags">
+                  <li class="card__tag">New</li>
+                  <li class="card__tag card__tag--sale">Sale</li>
+                </ul>
+                <ul class="card__actions">
+                  <li>
+                    <button type="button" class="card__button" aria-label="Like button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#heart"></use>
+                      </svg>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="card__button add-to-cart" data-name="Best Statement Ever"
+                      aria-label="Save to cart button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#eye"></use>
+                      </svg>
+                    </button>
+                  </li>
+                </ul>
+              </header>
+              <footer class="card__footer">
+                <a href="#" class="card__name">Best Statement Ever</a>
+                <div class="card__prices">
+                  <span class="card__price">₴2,454.00</span>
+                  <del class="card__price card__price--old">₴1,999.00</del>
+                </div>
+              </footer>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
   </main>
+  <!-- <main class="best-sellers">
+    <section class="best-sellers__container">
+      <ul class="best-sellers__tabs">
+        <div class="best-sellers__info">
+          <p class="best-sellers__subtitle">Best sellers</p>
+          <h2 class="best-sellers__title">Trending Products</h2>
+        </div>
+        <li>
+          <details name="best-seller-tabs" class="best-sellers__tab-container" open>
+            <summary class="best-sellers__tab">
+              <span class="tab__title">Mantra Rings</span>
+              <svg class="tab__icon">
+                <use href="./assets/icons/product-icons.svg#arrow"></use>
+              </svg>
+            </summary>
+            <article class="best-sellers__card card">
+              <a href="#">
+                <picture>
+                  <source media="(max-width: 352px)" srcset="
+          ./assets/images/mantra-rings-mobile.webp 1x,
+          ./assets/images/mantra-rings-mobile@2x.webp 2x" />
+                  <source media="(max-width: 991px)" srcset="
+          ./assets/images/mantra-rings-tablet.webp 1x,
+          ./assets/images/mantra-rings-tablet@2x.webp 2x" />
+                  <img class="card__image" src="./assets/images/mantra-rings.jpg" alt="VIP Ring" />
+                </picture>
+              </a>
+              <div class="card__content">
+                <header class="card__header">
+                  <ul class="card__tags">
+                    <li class="card__tag">New</li>
+                    <li class="card__tag card__tag--sale">Sale</li>
+                  </ul>
+                  <div class="card__actions">
+                    <button type="button" class="card__button" aria-label="Like button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#heart"></use>
+                      </svg>
+                    </button>
+                    <button type="button" class="card__button add-to-cart" aria-label="Save to cart button"
+                      data-name="VIP Ring">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#eye"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </header>
+                <footer class="card__footer">
+                  <a href="#" class="card__name">VIP Ring</a>
+                  <div class="card__prices">
+                    <span class="card__price">₴1,999.00</span>
+                    <del class="card__price card__price--old">₴999.00</del>
+                  </div>
+                </footer>
+              </div>
+            </article>
+          </details>
+        </li>
+        <li>
+          <details name="best-seller-tabs" class="best-sellers__tab-container">
+            <summary class="best-sellers__tab">
+              <span class="tab__title">CharityBands®</span>
+              <svg class="tab__icon">
+                <use href="./assets/icons/product-icons.svg#arrow"></use>
+              </svg>
+            </summary>
+            <article class="best-sellers__card card">
+              <a href="#">
+                <picture>
+                  <source media="(max-width: 352px)" srcset="
+          ./assets/images/charity-bands-mobile.webp 1x,
+          ./assets/images/charity-bands-mobile@2x.webp 2x" />
+                  <source media="(max-width: 991px)" srcset="
+          ./assets/images/charity-bands-tablet.webp 1x,
+          ./assets/images/charity-bands-tablet@2x.webp 2x" />
+                  <img class="card__image" src="./assets/images/charity-bands.jpg" alt="Butterfly - Hope And Rebirth" />
+                </picture>
+              </a>
+              <div class="card__content">
+                <header class="card__header">
+                  <ul class="card__tags">
+                    <li class="card__tag">New</li>
+                    <li class="card__tag card__tag--sale">Sale</li>
+                    <li class="card__tag">Top</li>
+                  </ul>
+                  <div class="card__actions">
+                    <button type="button" class="card__button" aria-label="Like button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#heart"></use>
+                      </svg>
+                    </button>
+                    <button type="button" class="card__button add-to-cart" aria-label="Save to cart button"
+                      data-name="Butterfly - Hope And Rebirth">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#eye"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </header>
+                <footer class="card__footer">
+                  <a href="#" class="card__name">Butterfly - Hope And Rebirth</a>
+                  <div class="card__prices">
+                    <span class="card__price">₴1,424.00</span>
+                    <del class="card__price card__price--old">₴1,424.00</del>
+                  </div>
+                </footer>
+              </div>
+            </article>
+          </details>
+        </li>
+        <li>
+          <details name="best-seller-tabs" class="best-sellers__tab-container">
+            <summary class="best-sellers__tab">
+              <span class="tab__title">Statement Collection</span>
+              <svg class="tab__icon">
+                <use href="./assets/icons/product-icons.svg#arrow"></use>
+              </svg>
+            </summary>
+            <article class="best-sellers__card card">
+              <a href="#">
+                <picture>
+                  <source media="(max-width: 352px)" srcset="
+          ./assets/images/statement-collection-mobile.webp 1x,
+          ./assets/images/statement-collection-mobile@2x.webp 2x" />
+                  <source media="(max-width: 991px)" srcset="
+          ./assets/images/statement-collection-tablet.webp 1x,
+          ./assets/images/statement-collection-tablet@2x.webp 2x" />
+                  <img class="card__image" src="./assets/images/statement-collection.jpg" alt="Best Statement Ever" />
+                </picture>
+              </a>
+              <div class="card__content">
+                <header class="card__header">
+                  <ul class="card__tags">
+                    <li class="card__tag">New</li>
+                    <li class="card__tag card__tag--sale">Sale</li>
+                  </ul>
+                  <div class="card__actions">
+                    <button type="button" class="card__button" aria-label="Like button">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#heart"></use>
+                      </svg>
+                    </button>
+                    <button type="button" class="card__button add-to-cart" aria-label="Save to cart button"
+                      data-name="Best Statement Ever">
+                      <svg class="card__icon">
+                        <use href="./assets/icons/product-icons.svg#eye"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </header>
+                <footer class="card__footer">
+                  <a href="#" class="card__name">Best Statement Ever</a>
+                  <div class="card__prices">
+                    <span class="card__price">₴2,454.00</span>
+                    <del class="card__price card__price--old">₴1,999.00</del>
+                  </div>
+                </footer>
+              </div>
+            </article>
+          </details>
+        </li>
+      </ul>
+    </section>
+  </main> -->
+  <dialog class="best-sellers__modal modal">
+    <div class="modal__container">
+      <header class="modal__header">
+        <button type="button" class="modal__close-btn" aria-label="Close modal">
+          <svg class="modal__icon">
+            <use href="/assets/icons/product-icons.svg#close"></use>
+          </svg>
+        </button>
+      </header>
+      <section class="modal__content">
+        <p class="modal__info">
+          <span class="modal__card-title"></span>
+          has been added to the your cart.
+        </p>
+      </section>
+    </div>
+  </dialog>
 </body>
 
 </html>
